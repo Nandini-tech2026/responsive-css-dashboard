@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Responsive Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+  <h1>Analytics Dashboard</h1>
+  <button class="btn" id="theme">Toggle theme</button>
+</header>
+<main class="dashboard">
+  <article class="card"><h2>Users</h2><div class="stat">12,480</div><p>+8% this week</p></article>
+  <article class="card"><h2>Revenue</h2><div class="stat">$48.2k</div><p>+12% this month</p></article>
+  <article class="card"><h2>Orders</h2><div class="stat">1,932</div><p>+3% today</p></article>
+  <article class="card"><h2>Sessions</h2><div class="stat">86.4k</div><p>Steady growth</p></article>
+  <article class="card wide"><h2>Overview</h2><p>This dashboard uses CSS custom properties (design tokens), CSS Grid with fluid breakpoints at 320, 768, 1024 and 1440px, glassmorphism, hover transitions and light/dark themes.</p></article>
+</main>
+<script>
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved) root.dataset.theme = saved;
+  document.getElementById('theme').onclick = () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', root.dataset.theme);
+  };
+</script>
+</body>
+</html>
