@@ -1,0 +1,122 @@
+/* ===== Design Tokens ===== */
+:root {
+  --color-primary: #6366f1;
+  --color-accent: #f5b800;
+  --bg: #f4f5fb;
+  --surface: rgba(255, 255, 255, 0.65);
+  --text: #1b1b2f;
+  --text-muted: #5b5b75;
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.16);
+
+  --font-base: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: clamp(1.5rem, 4vw, 2.25rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --transition: 0.25s ease;
+}
+
+[data-theme="dark"] {
+  --bg: #0f1020;
+  --surface: rgba(30, 32, 60, 0.6);
+  --text: #eef0ff;
+  --text-muted: #a3a6c8;
+  --border: rgba(255, 255, 255, 0.12);
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.6);
+}
+
+/* ===== Base (mobile-first) ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; max-width: 100%; overflow-x: hidden; }
+body {
+  font-family: var(--font-base);
+  font-size: var(--fs-md);
+  color: var(--text);
+  background:
+    radial-gradient(circle at 10% 10%, var(--color-primary) 0, transparent 35%),
+    radial-gradient(circle at 90% 90%, var(--color-accent) 0, transparent 30%),
+    var(--bg);
+  background-attachment: fixed;
+  transition: background var(--transition), color var(--transition);
+}
+img { max-width: 100%; height: auto; }
+
+/* ===== Layout ===== */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3);
+}
+.header h1 { margin: 0; font-size: var(--fs-xl); }
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr;          /* 320px+ : 1 column */
+  gap: var(--space-3);
+  padding: var(--space-3);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* ===== Glass card ===== */
+.card {
+  background: var(--surface);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.card h2 { margin: 0 0 var(--space-2); font-size: var(--fs-lg); }
+.card p { margin: 0; color: var(--text-muted); font-size: var(--fs-sm); }
+.stat { font-size: var(--fs-xl); font-weight: 700; color: var(--color-primary); }
+
+.btn {
+  font: inherit;
+  cursor: pointer;
+  border: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-primary);
+  color: #fff;
+  transition: transform var(--transition), opacity var(--transition);
+}
+.btn:hover { transform: scale(1.05); opacity: 0.9; }
+
+/* ===== Fluid breakpoints ===== */
+@media (min-width: 768px) {
+  .dashboard { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); padding: var(--space-4); }
+  .card.wide { grid-column: span 2; }
+}
+@media (min-width: 1024px) {
+  .dashboard { grid-template-columns: repeat(3, 1fr); }
+  .card.wide { grid-column: span 3; }
+}
+@media (min-width: 1440px) {
+  .dashboard { grid-template-columns: repeat(4, 1fr); gap: var(--space-5); padding: var(--space-5); }
+  .card.wide { grid-column: span 4; }
+}
